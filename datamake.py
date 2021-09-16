@@ -1,11 +1,8 @@
 #%%
 %matplotlib inline
 import pandas as pd
-import matplotlib.pyplot as plt
-import statsmodels.api as sm
 import pandas_datareader.data as pdr
 import datetime
-import seaborn
 print("モジュールの読み込みが完了しました！")
 
 #%% ファイルを開く
@@ -26,15 +23,15 @@ end = datetime.datetime(2019,12,31) #データの終期
 #################################
 
 #取得するデータを設定
-#四半期（実質）
+#四半期
 df_q = pdr.DataReader(code_q, 'fred', start, end)
 df_q.columns = sheet_q["notation"]
-
-# 月次（実質）
+df_q["y_obs"] = (df_q["y_raw"]-df_q["ypot"])/df_q["ypot"]*100
+# 月次
 df_m = pdr.DataReader(code_m, 'fred', start, end)
 df_m.columns = sheet_m["notation"]
 
-# 日次（実質）
+# 日次
 df_d = pdr.DataReader(code_d, 'fred', start, end)
 df_d.columns = sheet_d["notation"]
 
@@ -58,5 +55,5 @@ df_m_merge = pd.merge(df_m, df_m_d, on = 'DATE')
 df_q_merge.to_excel('C:\dataPJ\DB_q.xlsx', sheet_name = 'quarterly')
 df_m_merge.to_excel('C:\dataPJ\DB_m.xlsx', sheet_name = 'monthly')
 df_d.to_excel('C:\dataPJ\DB_d.xlsx', sheet_name = 'daily')
+df_q_merge.to_excel('C:\dataPJ\dynare_sim\DB_dynare.xlsx', index=False)
 print("DBの書き出しが完了しました！")
-# %%
