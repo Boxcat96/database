@@ -72,4 +72,3 @@ plt.axhline(y=0,color ="black", lw=0.5)
 plt.legend(loc = 'lower left')
 plt.show()
 fig.savefig('graph\TaylorRule.png')
-# %%
