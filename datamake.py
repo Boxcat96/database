@@ -55,9 +55,9 @@ df_q_merge = pd.merge(df_q_merge_raw, df_q_d, on = 'DATE')
 df_m_merge = pd.merge(df_m, df_m_d, on = 'DATE')
 
 #データの書き出し
-df_q_merge.to_excel('C:\dataPJ\DB_q.xlsx', sheet_name = 'quarterly')
-df_m_merge.to_excel('C:\dataPJ\DB_m.xlsx', sheet_name = 'monthly')
-df_d.to_excel('C:\dataPJ\DB_d.xlsx', sheet_name = 'daily')
+df_q_merge.to_excel('C:\dataPJ\DB_q.xlsx', sheet_name = 'quarterly', float_format='%.2f')
+df_m_merge.to_excel('C:\dataPJ\DB_m.xlsx', sheet_name = 'monthly', float_format='%.2f')
+df_d.to_excel('C:\dataPJ\DB_d.xlsx', sheet_name = 'daily', float_format='%.2f')
 print("DBの書き出しが完了しました！")
 # %%
 # 処理時間
