@@ -2,6 +2,8 @@
 import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(style='darkgrid')
 df_dynare = pd.read_excel('C:\dataPJ\DB_q.xlsx')
 df_dynare = df_dynare.set_index('DATE') #indexを設定
 #最終何期を落とすか決める
@@ -34,6 +36,7 @@ df_dynare["g_obs"] = Gcycle/Gtrend*100
 
 #データの書き出し（dynareが読み込むようindexは削除）
 df_dynare.to_excel('C:\dataPJ\dynare_sim\DB_dynare.xlsx', index=False, float_format='%.2f')
+df_dynare.to_excel('C:\dataPJ\dynare_sim\DB_VAR.xlsx', float_format='%.2f')
 print("Dynare_DBの書き出しが完了しました！")
 
 #############################################
@@ -60,7 +63,7 @@ fig = plt.figure()
 plt.plot(df_dynare["w_obs"],label="Wage",color ="deepskyblue")
 plt.plot(df_dynare["n_obs"],label="Labor",color ="darkorange")
 plt.axhline(y=0,color ="black", lw=0.5)
-plt.legend(loc = 'lower left')
+plt.legend(loc = 'upper left')
 plt.show()
 fig.savefig('graph\WvsN.png', dpi = 1000)
 # %%  GDP vs Investment
@@ -93,7 +96,7 @@ df_dynare['MODEL'] = 0.5*df_dynare["y_obs"] + 1.5 * df_dynare["pi_obs"]
 plt.plot(df_dynare["MODEL"],label="Taylor Rule",color ="deepskyblue")
 plt.plot(df_dynare["r_obs"],label="FF RATE",color ="darkorange")
 plt.axhline(y=0,color ="black", lw=0.5)
-plt.legend(loc = 'lower left')
+plt.legend(loc = 'upper right')
 plt.show()
 fig.savefig('graph\TaylorRule.png', dpi = 1000)
 # %%
